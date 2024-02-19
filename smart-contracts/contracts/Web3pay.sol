@@ -5,7 +5,7 @@
 // 
 pragma solidity ^0.8.9;
 
-contract Web3Pay {
+contract Web3pay {
     address public owner; // owner of the contract address
 
     constructor() {
