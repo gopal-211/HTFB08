@@ -9,6 +9,9 @@ module.exports = {
       url:"https://polygon-mumbai.g.alchemy.com/v2/O4DCybOmylKsCBfBLR5A54dggdgBHj0O",
       accounts: [key]
     }
+  },
+  etherscan: {
+    apiKey:"BI2PR6NZ8TJ2EQT5XRH2B7BKZ4RWCSGSZQ"
   }
 };
 
