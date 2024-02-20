@@ -8,6 +8,7 @@ import { publicProvider } from "wagmi/providers/public";
 import { polygonMumbai } from '@wagmi/chains';
 import reportWebVitals from './reportWebVitals';
 import Navbar from './componets/Navbar';
+import Portfolio from './Portfolio';
 
 
 const { provider, webSocketProvider } = configureChains(
@@ -30,6 +31,7 @@ root.render(
     <hr/>
     <Routes>
       <Route path='/' element={<App/>}></Route>
+      <Route path='/portfolio' element={<Portfolio/>}></Route>
     </Routes>
     </WagmiConfig>
   </React.StrictMode>
