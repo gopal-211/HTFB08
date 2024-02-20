@@ -86,6 +86,144 @@ function convertArrayToObjects(array) {
     return res.status(200).json(jsonResponse);
   });
 
+  // functions of portfolio  to get the details of specific address
+app.get("/nativeBalance", async (req, res) => {
+  
+
+  const { userAddress } = req.query;
+  try {
+    const secResponse = await Moralis.EvmApi.balance.getNativeBalance({
+      chain: "0x13881",
+      address: userAddress,
+    });
+  
+    const jsonResponseBal = (secResponse.raw.balance / 1e18).toFixed(2);
+  
+    const thirResponse = await Moralis.EvmApi.token.getTokenPrice({
+      address: "0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0",
+    });
+  
+    const jsonResponseDollars = (
+      thirResponse.raw.usdPrice * jsonResponseBal
+    ).toFixed(2);
+
+    const jsonResponse = {
+     
+      balance: jsonResponseBal,
+      dollars: jsonResponseDollars,
+    
+    };
+  
+    return res.status(200).json(jsonResponse);
+  } catch (error) {
+    console.error('Error fetching native balance:', error);
+    res.status(500).json({ error: 'An error occurred while fetching native balance' });
+  }
+});
+
+//GET AMOUNT AND VALUE OF ERC20 TOKENS
+
+app.get("/tokenBalances", async (req, res) => {
+  
+  try {
+    const { address} = req.query;
+    
+    const response = await Moralis.EvmApi.token.getWalletTokenBalances({
+      address: address,
+      chain: "0x13881",
+    });
+
+    let tokens = response.data;
+    let legitTokens = [];
+    for (let i = 0; i < tokens.length; i++) {
+      try {
+        const priceResponse = await Moralis.EvmApi.token.getTokenPrice({
+          address: tokens[i].token_address,
+          chain: chain,
+        });
+        if (priceResponse.data.usdPrice > 0.01) {
+          tokens[i].usd = priceResponse.data.usdPrice;
+          legitTokens.push(tokens[i]);
+        } else {
+          console.log("no coins are there");
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+
+    res.send(legitTokens);
+  } catch (e) {
+    res.send(e);
+  }
+});
+
+//GET Users NFT's
+
+app.get("/nftBalance", async (req, res) => {
+ 
+  try {
+    const { address } = req.query;
+
+    const response = await Moralis.EvmApi.nft.getWalletNFTs({
+      address: address,
+      chain: chain,
+    });
+
+    const userNFTs = response.data;
+
+    res.send(userNFTs);
+  } catch (e) {
+    res.send(e);
+  }
+});
+
+//GET USERS TOKEN TRANSFERS
+
+app.get("/tokenTransfers", async (req, res) => {
+ 
+  try {
+    const { address } = req.query;
+
+    const response = await Moralis.EvmApi.token.getWalletTokenTransfers({
+      address: address,
+      chain: "0x13881"
+    });
+    
+    const userTrans = response.data.result;
+
+    let userTransDetails = [];
+    
+    for (let i = 0; i < userTrans.length; i++) {
+      
+      try {
+        const metaResponse = await Moralis.EvmApi.token.getTokenMetadata({
+          addresses: [userTrans[i].address],
+          chain: "0x13881"
+        });
+        if (metaResponse.data) {
+          userTrans[i].decimals = metaResponse.data[0].decimals;
+          userTrans[i].symbol = metaResponse.data[0].symbol;
+          userTransDetails.push(userTrans[i]);
+        } else {
+          console.log("no details for coin");
+        }
+      } catch (e) {
+        console.log(e);
+      }
+
+    }
+
+
+
+    res.send(userTransDetails);
+  } catch (e) {
+    res.send(e);
+  }
+});
+
+
 Moralis.start({
     apiKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub25jZSI6IjdjYWZjY2QwLTQwN2QtNGUyZS05YjQ1LTA4NGNiYzhjYjg5OCIsIm9yZ0lkIjoiMzc3OTg3IiwidXNlcklkIjoiMzg4NDMzIiwidHlwZUlkIjoiOGQ5ZGUxOTQtYmZkZC00ZDc0LTlkMjgtOWQxNWFlMzIwODQ2IiwidHlwZSI6IlBST0pFQ1QiLCJpYXQiOjE3MDgzNzg4NzIsImV4cCI6NDg2NDEzODg3Mn0.aJYLYBDmLgQAOAQxYLu8jLQ7ZhboQ9qidLNUitXEQ_g",
   }).then(() => {
