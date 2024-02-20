@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Web3 from 'web3';
 import { DollarOutlined, SwapOutlined } from "@ant-design/icons";
 import { Modal, Input, InputNumber } from "antd";
 import { usePrepareContractWrite, useContractWrite, useWaitForTransaction  } from "wagmi";
@@ -7,6 +8,8 @@ import ABI from "../Web3pay.json";
 
 function RequestAndPay({ requests, getNameAndBalance }) {
     // functions to hold request data
+    const [address, setAddress] = useState('');
+    const [isValid, setIsValid] = useState(false);
   const [payModal, setPayModal] = useState(false);
   const [requestModal, setRequestModal] = useState(false);
   const [requestAmount, setRequestAmount] = useState(5);
@@ -61,6 +64,32 @@ function RequestAndPay({ requests, getNameAndBalance }) {
     setRequestModal(false);
   };
 
+   // Function to validate Ethereum addresses
+   const validateEthereumAddress = (address) => {
+    // Check if the address is a valid Ethereum address
+    if (!/^0x[a-fA-F0-9]{40}$/.test(address)) {
+        return false;
+    }
+
+    
+
+    const web3 = new Web3(window.ethereum);
+
+    // Check if the address is a valid checksum address
+    if (!web3.utils.isAddress(address)) {
+        return false;
+    }
+
+    return true;
+};
+
+// Handler for input change
+const handleInputChange = (event) => {
+    const inputAddress = event.target.value;
+    setAddress(inputAddress);
+    setIsValid(validateEthereumAddress(inputAddress));
+};
+
   useEffect(()=>{
     if(isSuccess || isSuccessRequest){
       getNameAndBalance();
@@ -101,6 +130,19 @@ function RequestAndPay({ requests, getNameAndBalance }) {
       >
         <p>Amount (Matic)</p>
         <InputNumber value={requestAmount} onChange={(val)=>setRequestAmount(val)}/>
+        <div>
+        <Input
+            type="text"
+            placeholder="Enter Ethereum address to verify"
+            value={address}
+            onChange={handleInputChange}
+        />
+        {isValid ? (
+            <p style={{ color: 'green' }}>Valid address</p>
+        ) : (
+            <p style={{ color: 'red' }}>Invalid address</p>
+        )}
+    </div>
         <p>From (address)</p>
         <Input placeholder="0x..." value={requestAddress} onChange={(val)=>setRequestAddress(val.target.value)}/>
         <p>Message</p>

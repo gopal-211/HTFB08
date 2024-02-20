@@ -94,7 +94,7 @@ useEffect(() => {
     </div>
 
   ):(
-    <span className='bg-black text-white text-center text-3xl'>Please Login</span>
+    <span className='bg-black text-white text-center text-3xl'>Please connect Wallet</span>
   )
 }
 
