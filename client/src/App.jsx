@@ -4,6 +4,9 @@ import { useConnect, useAccount, useDisconnect } from "wagmi";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import axios from "axios";
 import Addname from './componets/AddName';
+import Transactions from './componets/Transcations';
+import Balance from './componets/Balance';
+import SummaryOfUser from './componets/SummaryOfUser'; 
 
 
 
@@ -53,7 +56,7 @@ async function getUserDetails(){
 // change the connnectivity
 useEffect(() => {
   if (!isConnected) return;
-  getUserDetails()
+  // getUserDetails()
 }, [isConnected]);
 
   return (
@@ -68,6 +71,13 @@ useEffect(() => {
       )
      }
       {name}
+      <SummaryOfUser
+      address={address}
+                  name={name}
+                  balance={balance}
+                />
+      <Balance dollars={dollars} />
+      <Transactions history={history}/>
      {
       !name &&(
         <Addname/>
