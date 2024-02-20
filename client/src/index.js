@@ -27,6 +27,7 @@ root.render(
   <React.StrictMode>
     <WagmiConfig client={client}>
     <Navbar/>
+    <hr/>
     <Routes>
       <Route path='/' element={<App/>}></Route>
     </Routes>

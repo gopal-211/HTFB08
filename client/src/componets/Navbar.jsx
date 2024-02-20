@@ -58,17 +58,17 @@ useEffect(() => {
   // getUserDetails()
 }, [isConnected]);
   return (
-    <Header className="bg-blue-400 flex justify-around items-center px-[-100px] py-6">
+    <Header className="bg-black flex  justify-between items-center shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
           
-    <h1 className='font-bold text-5xl text-blue-800'><NavLink to={'/'}>Web3Pay</NavLink></h1>
+    <h1 className='font-bold text-5xl text-white flex items-center pb-2 pr-10'><NavLink to={'/'}>Web3<span className='text-blue-700'>Pay</span></NavLink></h1>
     {isConnected &&(
 
      <div className=' hidden sm:flex gap-8 text-lg font-semibold'>
        <div
        >
-       <NavLink to={'/'} exact activeClassName="active" className="text-gray-700 hover:text-gray-900" >
+       <NavLink to={'/'} exact activeClassName="active" className="text-white " >
        
-         Summary
+         <span>Summary</span>
        </NavLink>
        </div>
       
@@ -80,12 +80,12 @@ useEffect(() => {
 
     {isConnected ?(
 
-   <button   onClick={disconnectAndSetNull}className='text-white bg-blue-600 px-3'>Disconnect</button>
+   <button  onClick={disconnectAndSetNull}className='text-white bg-blue-600 px-3'>Disconnect</button>
     ):(
 
    <button  type={"primary"} onClick={()=>{
      connect()
-   }}className='text-white bg-blue-600 px-3  rounded-xl m-2'>Connect Wallet</button>
+   }}className='text-white bg-blue-600 px-3'>Connect Wallet</button>
     )}
  </Header>
   )

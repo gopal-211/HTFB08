@@ -106,9 +106,9 @@ function RequestAndPay({ requests, getNameAndBalance }) {
         <p>Message</p>
         <Input placeholder="Lunch Bill..." value={requestMessage} onChange={(val)=>setRequestMessage(val.target.value)}/>
       </Modal>
-      <div className="requestAndPay">
+      <div className="flex justify-center gap-10">
         <div
-          className="quickOption"
+        className="p-10 flex w-[150px] h-[150px] shadow-2xl active:bg-blue-600 hover:bg-blue-600 rounded-xl mt-10 mb-10 flex-col font-bold text-2xl items-center justify-center bg-blue-200 text-white"
           onClick={() => {
             showPayModal();
           }}
@@ -120,7 +120,7 @@ function RequestAndPay({ requests, getNameAndBalance }) {
           )}
         </div>
         <div
-          className="quickOption"
+        className="p-10 flex w-[150px] h-[150px] shadow-2xl active:bg-blue-600 hover:bg-blue-600 rounded-xl mt-10 mb-10 flex-col font-bold text-2xl items-center justify-center bg-blue-200 text-white"
           onClick={() => {
             showRequestModal();
           }}

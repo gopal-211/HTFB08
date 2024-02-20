@@ -3,7 +3,7 @@ import React from "react";
 
 function Balance({dollars}) {
   return (
-    <div title="Current Balance"  className='w-full  bg-white max-w-[500px]'>
+    <div title="Current Balance"  className='w-full rounded-2xl bg-white max-w-[500px]'>
     <div className='text-center p-3 font-medium'>Current Balance</div>
     <hr />
       <div className="flex p-4 justify-center flex-col">

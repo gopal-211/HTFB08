@@ -8,6 +8,7 @@ import Transactions from './componets/Transcations';
 import Balance from './componets/Balance';
 import SummaryOfUser from './componets/SummaryOfUser'; 
 import RequestAndPay from './componets/RequestAndPay';
+import { Layout } from 'antd';
 
 
 function App() {
@@ -62,7 +63,45 @@ useEffect(() => {
   return (
     <>
   
-<div className=" w-screen h-screen bg-blue-300">
+<div className=" w-screen h-screen bg-black">
+
+
+<Layout className='bg-black'>
+       
+<div className='flex flex-col p-10'>
+{
+  isConnected ? (
+
+    <div className="flex flex-col">
+    <div className='flex justify-evenly flex-row gap-1'>
+           <Balance dollars={dollars} />
+      <SummaryOfUser
+      address={address}
+                  name={name}
+                  balance={balance}
+                />
+                {
+                  !name &&(<Addname/>)
+                }
+    </div>
+    <div>
+        <RequestAndPay  requests={requests} getNameAndBalance={getUserDetails}/>
+
+    </div>
+      <div className='flex'>
+<Transactions history={history}/>
+      </div>
+    </div>
+
+  ):(
+    <span className='bg-black text-white text-center text-3xl'>Please Login</span>
+  )
+}
+
+</div>
+</Layout>
+{/**
+
      <button onClick={()=>{connect()}}>{address ? " welcome": "connect" }</button>
      {
       address && (
@@ -71,20 +110,16 @@ useEffect(() => {
       )
      }
       {name}
-      <SummaryOfUser
-      address={address}
-                  name={name}
-                  balance={balance}
-                />
-      <Balance dollars={dollars} />
-      <Transactions history={history}/>
-      <RequestAndPay  requests={requests} getNameAndBalance={getUserDetails}/>
-
+      
+   
+      
+      
      {
       !name &&(
         <Addname/>
       ) 
-     }
+*/}
+     
 </div>
   </>
 

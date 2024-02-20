@@ -5,7 +5,7 @@ import Home from './AddName';
 
 const SummaryOfUser = ({address, name , balance}) => {
   return (
-    <div title="Account Details" className='w-full bg-white max-w-[500px]'>
+    <div title="Account Details" className='w-full rounded-2xl bg-white max-w-[500px]'>
     <div className='text-center p-3 font-medium'>Account Details</div>
     <hr />
       <div className='flex justify-center items-center w-full gap-6 h-auto ml-[-25px] mt-4 '>
