@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useConnect, useAccount, useDisconnect } from "wagmi";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
 import axios from "axios";
-
+import Addname from './componets/AddName';
 
 
 
@@ -17,7 +17,7 @@ const {connect} = useConnect({
 })
 
 // data from backend
-const [name, setName] = useState("...");
+const [name, setName] = useState("");
 const [balance, setBalance] = useState("...");
 const [dollars, setDollars] = useState("...");
 const [history, setHistory] = useState(null);
@@ -53,7 +53,7 @@ async function getUserDetails(){
 // change the connnectivity
 useEffect(() => {
   if (!isConnected) return;
-  // getUserDetails()
+  getUserDetails()
 }, [isConnected]);
 
   return (
@@ -66,6 +66,12 @@ useEffect(() => {
 
         <h1>User address : {address}</h1>
       )
+     }
+      {name}
+     {
+      !name &&(
+        <Addname/>
+      ) 
      }
 </div>
   </>
