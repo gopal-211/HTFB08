@@ -71,6 +71,13 @@ useEffect(() => {
          <span>Summary</span>
        </NavLink>
        </div>
+       <div
+       >
+       <NavLink to={'/portfolio'} exact activeClassName="active" className="text-white " >
+       
+         <span>Portfolio</span>
+       </NavLink>
+       </div>
       
        
      </div>

@@ -2,6 +2,12 @@ import React from 'react'
 
 import './App.css';
 import { useState, useEffect } from 'react';
+import WalletInputs from './componets/WalletInput';
+import NativeTokens from './componets/Nativetoken';
+import Nfts from './componets/Nfts';
+import Tokens from './componets/Tokens';
+import TransferHistory from './componets/TransferHistory';
+import PortfolioValue from './componets/PortfolioValue';
 import { Layout,Button } from 'antd';
 import { useConnect, useAccount, useDisconnect } from "wagmi";
 import { MetaMaskConnector } from "wagmi/connectors/metaMask";
@@ -74,15 +80,45 @@ useEffect(() => {
         </span></h1>
         <hr />
         <div className="mt-3 flex flex-col justify-center items-center">
-      wallet
+      <WalletInputs 
+      chain={chain}
+      setChain={setChain}
+      wallet={wallet}
+      setWallet={setWallet}/>
       <div className='flex flex-col p-10'>
-      portfolio value
+      <PortfolioValue 
+      nativeValue={nativeValue}
+        tokens={tokens}
+      />
       </div>
-     native tokens
-      tokens
-      transfer history
-      nfts
-      
+     <NativeTokens
+     wallet={wallet}
+     chain={chain}
+     nativeBalance={nativeBalance}
+     setNativeBalance={setNativeBalance}
+     nativeValue={nativeValue}
+     setNativeValue={setNativeValue}
+     />
+    <tokens
+    wallet={wallet} 
+    chain={chain}
+    tokens={tokens}
+    setTokens={setTokens}
+     />
+    <TransferHistory 
+    chain={chain} 
+    wallet={wallet}
+    transfers={transfers}
+    setTransfers={setTransfers}
+    />
+      <Nfts 
+      wallet={wallet} 
+      chain={chain}
+      nfts={nfts}
+      setNfts={setNfts}
+      filteredNfts={filteredNfts}
+      setFilteredNfts={setFilteredNfts}
+      />
       
     </div>
 </div>
@@ -90,3 +126,5 @@ useEffect(() => {
 
   );
 }
+
+export default Portfolio;
