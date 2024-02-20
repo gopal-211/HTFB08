@@ -7,7 +7,7 @@ import Addname from './componets/AddName';
 import Transactions from './componets/Transcations';
 import Balance from './componets/Balance';
 import SummaryOfUser from './componets/SummaryOfUser'; 
-
+import RequestAndPay from './componets/RequestAndPay';
 
 
 function App() {
@@ -56,7 +56,7 @@ async function getUserDetails(){
 // change the connnectivity
 useEffect(() => {
   if (!isConnected) return;
-  // getUserDetails()
+  getUserDetails()
 }, [isConnected]);
 
   return (
@@ -78,6 +78,8 @@ useEffect(() => {
                 />
       <Balance dollars={dollars} />
       <Transactions history={history}/>
+      <RequestAndPay  requests={requests} getNameAndBalance={getUserDetails}/>
+
      {
       !name &&(
         <Addname/>
