@@ -7,7 +7,7 @@ import App from './App';
 import { publicProvider } from "wagmi/providers/public";
 import { polygonMumbai } from '@wagmi/chains';
 import reportWebVitals from './reportWebVitals';
-
+import Navbar from './componets/Navbar';
 
 
 const { provider, webSocketProvider } = configureChains(
@@ -21,15 +21,19 @@ const client = createClient({
   webSocketProvider,
 });
 
-ReactDOM.render(
+const root  = ReactDOM.createRoot(  document.getElementById('root'))
+root.render(
   <BrowserRouter> 
   <React.StrictMode>
     <WagmiConfig client={client}>
-   <App/>
+    <Navbar/>
+    <Routes>
+      <Route path='/' element={<App/>}></Route>
+    </Routes>
     </WagmiConfig>
   </React.StrictMode>
   </BrowserRouter>,
-  document.getElementById('root')
+
 );
 
 // If you want to start measuring performance in your app, pass a function
