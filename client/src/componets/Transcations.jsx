@@ -40,7 +40,7 @@ const columns = [
 function Transactions({ history }) {
 
   return (
-    <Card title="Recent Activity" style={{ width: "100%", minHeight: "663px" }}>
+    <Card title="Recent Activity" className=" overflow-scroll" style={{ width: "100%", minHeight: "663px" }}>
       {history && 
       <Table
         dataSource={history}

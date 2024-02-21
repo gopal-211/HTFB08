@@ -131,6 +131,7 @@ const handleInputChange = (event) => {
         <p>Amount (Matic)</p>
         <InputNumber value={requestAmount} onChange={(val)=>setRequestAmount(val)}/>
         <div>
+        <p>Check for the existence of address</p>
         <Input
             type="text"
             placeholder="Enter Ethereum address to verify"

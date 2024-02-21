@@ -8,6 +8,8 @@ import Transactions from './componets/Transcations';
 import Balance from './componets/Balance';
 import SummaryOfUser from './componets/SummaryOfUser'; 
 import RequestAndPay from './componets/RequestAndPay';
+import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Layout } from 'antd';
 
 
@@ -73,7 +75,7 @@ useEffect(() => {
   isConnected ? (
 
     <div className="flex flex-col">
-    <div className='flex justify-evenly flex-row gap-1'>
+    <div className='flex justify-evenly flex-col sm:flex-row gap-1'>
            <Balance dollars={dollars} />
       <SummaryOfUser
       address={address}
@@ -84,6 +86,13 @@ useEffect(() => {
                   !name &&(<Addname/>)
                 }
     </div>
+    <div
+     className=' text-center text-2xl mt-3'>
+    <Link to={'/portfolio'} exact activeClassName="active" className="text-white " >
+    Check Your <span className='text-blue-500'>Portfolio</span> value
+    </Link>
+    </div>
+   
     <div>
         <RequestAndPay  requests={requests} getNameAndBalance={getUserDetails}/>
 
