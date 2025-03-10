@@ -25,33 +25,6 @@ This project was built during a hackathon to provide a seamless and decentralize
 - **Node.js & Express** – Backend API
 - **Cors & Moralis** – Cross-origin requests & Web3 data fetching
 
-## 📦 Installation & Setup
-1. **Clone the repository**
-   ```sh
-   git clone https://github.com/yourusername/web3-portfolio.git
-   cd web3-portfolio
-   ```
-
-2. **Install dependencies**
-   ```sh
-   cd client
-   npm install
-   ```
-
-3. **Start the development server**
-   ```sh
-   npm start
-   ```
-   The frontend will run on `http://localhost:3000/`
-
-4. **Run the backend** (if needed locally)
-   ```sh
-   cd backend
-   npm install
-   node index.js
-   ```
-   The backend will run on `http://localhost:5000/`
-
 ## 🎯 Features
 ✅ **Real-time portfolio tracking** – Fetches users’ on-chain assets.  
 ✅ **Secure transactions** – Send, receive, and request money.  
